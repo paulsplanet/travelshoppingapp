@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Typography, Button, Form, Input } from "antd";
 import FileUpload from "../../utils/FileUpload";
+import Axios from "axios";
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -16,7 +17,7 @@ const Continents = [
 ]
 
 
-function UploadProductPage() {
+function UploadProductPage(props) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState(0);
@@ -37,7 +38,39 @@ function UploadProductPage() {
 
     const continentChangeHandler = e => {
         setContinenet(e.currentTarget.value);
-        console.log(e.currentTarget.value)
+        // console.log(e.currentTarget.value)
+    }
+
+    const updateImages = (newImages) => {
+        setImage(newImages);
+    }
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+        
+        if (!title || !description || !price || !continent || !image) {
+            return alert("You have to fill out all sections")
+        }
+
+        // sending product data to server
+        const body = {
+            writer: props.user.userData._id,
+            title: title,
+            description: description,
+            price: price,
+            continent: continent,
+            image: image,
+        }
+
+        Axios.post("/api/product", body)
+            .then(response => {
+                if(response.data.success) {
+                    alert("We uploaded your data successfully.")
+                    props.history.push('/');
+                } else {
+                    alert("We failed to upload your product.")
+                }
+            })
     }
 
 
@@ -46,8 +79,8 @@ function UploadProductPage() {
             <div style={{ textAlign: 'center', marginBottom: '2rem'}}>
                 <Title level={2}>Upload Travel Package</Title>
             </div>
-            <Form>
-                <FileUpload />
+            <Form onSubmit={submitHandler}>
+                <FileUpload refreshFunction={updateImages} />
                 <br />
                 <br />
                 <label>Destination</label>
@@ -69,7 +102,7 @@ function UploadProductPage() {
                 </select>
                 <br />
                 <br />
-                <Button>Confirm</Button>
+                <Button type="submit" onClick={submitHandler}>submit</Button>
             </Form>
         </div>
        
