@@ -1,3 +1,4 @@
+
 const { Schema } = require('mongoose');
 const mongoose = require('mongoose');
 
@@ -29,7 +30,10 @@ const productSchema = mongoose.Schema({
     views: {
         type: Number,
         default: 0
-    }
+    },
+    continents: {
+        type: String,
+    },
 }, { timestamps: true })
 
 

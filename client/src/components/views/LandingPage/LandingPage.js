@@ -23,7 +23,7 @@ function LandingPage() {
         return (
             <Col lg={6} md={8} xs={24} key={index}>
                 <Card  
-                    cover={<img style={{ width: '100%', maxHeight: '150px' }} src={`http://localhost:5000/${product.images[0]}`} />}    
+                    cover={<img src={`http://localhost:5000/${product.images[0]}`} />}    
                 >
                     <Meta title={product.title} description={`$${product.price}`} />
                 </Card>
