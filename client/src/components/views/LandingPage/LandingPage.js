@@ -102,10 +102,21 @@ function LandingPage() {
         }
         showFilteredResults(newFilters);
         setFilters(newFilters);
+        console.log("searchBox click")
     }
 
     const updateSearchTerm = (newSearchTerm) => {
+        let body = {
+            skip: 0,
+            limit: limit,
+            filters: filters,
+            searchTerm: newSearchTerm
+        }
+
+        setSkip(0);
         setSearchTerm(newSearchTerm);
+        getProducts(body);
+
     }
 
     return (
