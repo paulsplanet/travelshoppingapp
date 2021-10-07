@@ -10,16 +10,11 @@ function DetailProductPage (props) {
 
 
     useEffect(() => {
-
         axios.get(`/api/product/products_by_id?id=${productId}&type=single`)
             .then(response => {
-                if(response.data.success) {
-                    console.log("response", response.data)
-                    setProduct(response.data.product[0])
-                } else {
-                    alert('It is failed to download the product data')
-                }
+                setProduct(response.data[0]) 
             })
+            .catch(err => alert(err))
     }, [])
 
     return (
