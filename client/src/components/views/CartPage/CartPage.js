@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { getCartItems, removeCartItem } from "../../../_actions/user_actions";
+import { getCartItems, removeCartItem, onSuccessBuy } from "../../../_actions/user_actions";
 import UserCardBlock from "./Sections/UserCardBlock";
-import { Empty } from "antd";
+import { Empty, Result } from "antd";
 import Paypal from "../../utils/Paypal";
 
 function CartPage (props) {
     const [total, setTotal] = useState(0);
     const [showTotal, setShowTotal] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -43,6 +44,19 @@ function CartPage (props) {
             })
     }
 
+    const transactionSuccess = (data) => {
+        dispatch(onSuccessBuy({
+            paymentData: data,
+            cartDetail: props.user.cartDetail,
+        }))
+            .then(response => {
+                if (response.payload.success) {
+                    setShowTotal(false)
+                    setShowSuccess(true)
+                }
+            })
+    }
+
 
     return (
         <div style={{ width: '85%', margin: '3rem auto' }}>
@@ -54,15 +68,24 @@ function CartPage (props) {
             {showTotal ? 
                 <div style={{ marginTop: '3rem' }}>
                     <h2>Total Amount: ${total}</h2>
-                </div> :
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '3rem' }}>
-                    <br />
-                    <Empty description={false} />
-                    <h3 style={{ color: '#888' }}>No Items in the Cart</h3>
-                </div>
+                </div> 
+                : showSuccess? 
+                    <Result status="success" title="Successfully Purchased Items" />
+                    :
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '3rem' }}>
+                        <br />
+                        <Empty description={false} />
+                        <h3 style={{ color: '#888' }}>No Items in the Cart</h3>
+                    </div>
             }
 
-            <Paypal />
+            {showTotal && 
+                <Paypal 
+                    total={total} 
+                    onSuccess={transactionSuccess} 
+                />
+            }
+            
         </div>
     )
 }
