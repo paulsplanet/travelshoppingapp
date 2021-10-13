@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FaCode } from "react-icons/fa";
 import axios from "axios";
-import { Icon, Col, Card, Row, Carousel } from "antd";
+import { Icon, Col, Card, Row } from "antd";
 import Meta from "antd/lib/card/Meta";
 import ImageSlider from '../../utils/ImageSlider';
 import CheckBox from './Sections/CheckBox';
@@ -11,7 +11,7 @@ import SearchBox from './Sections/SearchBox';
 
 function LandingPage() {
     const [products, setProducts] = useState([]);
-    const [skip, setSkip] = useState(0);
+    const [Skip, setSkip] = useState(0);
     const [limit, setLimit] = useState(8);
     const [postSize, setPostSize] = useState(0);
     const [filters, setFilters] = useState({
@@ -22,7 +22,7 @@ function LandingPage() {
 
     useEffect(() => {
         let body = {
-            skip: skip,
+            skip: Skip,
             limit: limit,
         }
         getProducts(body);
@@ -46,7 +46,7 @@ function LandingPage() {
     }
 
     const loadMoreHandler = () => {
-        let skip = skip + limit;
+        let skip = Skip + limit;
         let body = {
             skip: skip,
             limit: limit,
@@ -122,7 +122,7 @@ function LandingPage() {
     return (
         <div style={{ width: '75%', margin: '3rem auto' }}>
             <div style={{ textAlign: 'center' }}>
-                <h2>Let's Travel Anywhere <Icon type="rocket" /></h2>
+                <h2>Let's Travel Anywhere <Icon type="car" style={{ marginLeft: '1rem' }}/></h2>
             </div>
             
             <Row gutter={[16, 16]}>

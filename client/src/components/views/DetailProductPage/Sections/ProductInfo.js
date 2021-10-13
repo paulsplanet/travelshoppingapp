@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Descriptions, descriptions } from "antd";
+import { Button, Descriptions } from "antd";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../../_actions/user_actions";
 
@@ -12,11 +12,11 @@ function ProductInfo (props) {
 
     return (
         <div>
-            <Descriptions title="Product Info">
-                <Descriptions.Item label="Price">{props.detail.price}</Descriptions.Item>
-                <Descriptions.Item label="Sold">{props.detail.sold}</Descriptions.Item>
-                <Descriptions.Item label="View">{props.detail.views}</Descriptions.Item>
-                <Descriptions.Item label="Description">{props.detail.description}</Descriptions.Item>
+            <Descriptions title="Product Info" bordered>
+                <Descriptions.Item label="Price" span={3}>{props.detail.price}</Descriptions.Item>
+                <Descriptions.Item label="Sold" span={3}>{props.detail.sold}</Descriptions.Item>
+                <Descriptions.Item label="View" span={3}>{props.detail.views}</Descriptions.Item>
+                <Descriptions.Item label="Description" span={3}>{props.detail.description}</Descriptions.Item>
             </Descriptions>
 
             <br />

@@ -3,6 +3,8 @@ import LeftMenu from './Sections/LeftMenu';
 import RightMenu from './Sections/RightMenu';
 import { Drawer, Button, Icon } from 'antd';
 import './Sections/Navbar.css';
+import logo from "../../../logo/paulsplanetlogo.png";
+
 
 function NavBar() {
   const [visible, setVisible] = useState(false)
@@ -17,8 +19,8 @@ function NavBar() {
 
   return (
     <nav className="menu" style={{ position: 'fixed', zIndex: 5, width: '100%' }}>
-      <div className="menu__logo">
-        <a href="/">Logo</a>
+      <div className="menu__logo" style={{ height: '67px', display: 'flex', alignItems: 'center' }}>
+        <a href="/" style={{ backgroundImage: 'url('+logo+')', backgroundSize: 'cover', width: '54px', height: '53px' }}></a>
       </div>
       <div className="menu__container">
         <div className="menu_left">
