@@ -7,6 +7,7 @@ import {
     GET_CART_ITEMS,
     REMOVE_CART_ITEM,
     ON_SUCCESS_BUY,
+    ADD_TO_MYPICK,
 } from '../_actions/types';
  
 
@@ -42,6 +43,15 @@ export default function(state={},action){
             userData: {
                 ...state.userData, cart: action.payload.cart
             } }  
+        case ADD_TO_MYPICK:
+            return {
+                ...state, 
+                userData: {
+                    ...state.userData,
+                    mypick: action.payload
+                }
+            }
+            
         default:
             return state;
     }

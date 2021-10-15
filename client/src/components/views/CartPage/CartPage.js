@@ -10,7 +10,7 @@ function CartPage (props) {
     const [showTotal, setShowTotal] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
     const dispatch = useDispatch();
-
+    
     useEffect(() => {
         let cartItems = [];
 

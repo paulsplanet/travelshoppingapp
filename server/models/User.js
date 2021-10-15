@@ -41,6 +41,10 @@ const userSchema = mongoose.Schema({
         type: Array,
         default: [],
     },
+    mypick: {
+        type: Array,
+        default: [],
+    },
 })
 
 

@@ -9,6 +9,7 @@ import {
     GET_CART_ITEMS,
     REMOVE_CART_ITEM,
     ON_SUCCESS_BUY,
+    ADD_TO_MYPICK,
 } from './types';
 
 // import { response } from 'express';
@@ -120,4 +121,16 @@ export function onSuccessBuy(data) {
     }
 }
 
+export function addToMyPick(id){
+    let body = {
+        productId: id
+    }
 
+    const request = axios.post(`${USER_SERVER}/addToMyPick`, body)
+        .then(response => response.data);
+
+    return {
+        type: ADD_TO_MYPICK,
+        payload: request
+    }
+}

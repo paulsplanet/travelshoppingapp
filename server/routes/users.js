@@ -22,6 +22,7 @@ router.get("/auth", auth, (req, res) => {
         image: req.user.image,
         cart: req.user.cart,
         history: req.user.history,
+        mypick: req.user.mypick,
     });
 });
 
@@ -208,5 +209,38 @@ router.post('/successBuy', auth, (req, res) => {
     )
 
 })
+
+router.post("/addToMyPick", auth, (req, res) => {
+    User.findOne({ _id: req.user._id },
+        (err, userInfo) => {
+            let duplicate = false;
+            userInfo.mypick.forEach((item) => {
+                if(item.id === req.body.productId) {
+                    duplicate = true;
+                }
+            })
+
+            if(duplicate) {
+                return
+            } else {
+                User.findOneAndUpdate(
+                    { _id: req.user._id},
+                    {
+                        $push: {
+                            mypick: {
+                                id: req.body.productId,
+                            }
+                        }
+                    },
+                    { new: true },
+                    (err, userInfo) => {
+                        if(err) return res.status(400).json({ success: false, err })
+                        res.status(200).send(userInfo.mypick)
+                    }
+                )
+            }
+
+        })
+});
 
 module.exports = router;
