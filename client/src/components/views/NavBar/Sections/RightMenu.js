@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 
 function RightMenu(props) {
   const user = useSelector(state => state.user)
-
+  
   const logoutHandler = () => {
     axios.get(`${USER_SERVER}/logout`).then(response => {
       if (response.status === 200) {
@@ -42,8 +42,11 @@ function RightMenu(props) {
         </Menu.Item>
 
         <Menu.Item key="mypick">
-          <a href="/user/mypick" style={{ display: 'block', height: '60px', marginRight: '-14px' }}>
+          <a href="/user/mypick" style={{ display: 'block', height: '60px', marginRight: '-14px', position: 'relative' }}>
             <Icon type="heart" style={{ fontSize: 25 }}/>
+            { user.userData && user.userData.mypick[0] &&
+              <div style={{ borderRadius: '3px', height: '6px', width: '6px', backgroundColor:  'tomato', position: 'absolute', top: '12px', right: '22px' }}></div>
+            } 
           </a>
         </Menu.Item>
 

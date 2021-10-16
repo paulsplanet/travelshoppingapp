@@ -7,4 +7,5 @@ export const GET_CART_ITEMS = 'get_cart_items';
 export const REMOVE_CART_ITEM = 'remove_cart_item';
 export const ON_SUCCESS_BUY= 'on_success_buy';
 export const ADD_TO_MYPICK = 'add_to_mypick';
+export const REMOVE_MYPICK_ITEM = 'remove_mypick_item';
 

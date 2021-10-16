@@ -10,6 +10,7 @@ import {
     REMOVE_CART_ITEM,
     ON_SUCCESS_BUY,
     ADD_TO_MYPICK,
+    REMOVE_MYPICK_ITEM,
 } from './types';
 
 // import { response } from 'express';
@@ -131,6 +132,17 @@ export function addToMyPick(id){
 
     return {
         type: ADD_TO_MYPICK,
+        payload: request
+    }
+}
+
+export function removeMyPickItem(productId) {
+    
+    const request = axios.get(`/api/users/removeFromMyPick?id=${productId}`)
+        .then(response => response.data)
+
+    return {
+        type: REMOVE_MYPICK_ITEM,
         payload: request
     }
 }

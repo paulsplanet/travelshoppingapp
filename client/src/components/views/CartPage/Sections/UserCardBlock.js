@@ -14,7 +14,7 @@ function UserCardBlock (props) {
         props.products && props.products.map((product, index) => (
             <tr key={index}>
                 <td>
-                    <img style={{ width: '70px' }} alt="product" src={renderCartImage(product.images)} />
+                    <img style={{ width: '150px' }} alt="product" src={renderCartImage(product.images)} />
                 </td>
                 <td>
                     {product.quantity} EA

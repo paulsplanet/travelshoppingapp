@@ -243,4 +243,32 @@ router.post("/addToMyPick", auth, (req, res) => {
         })
 });
 
+router.get('/removeFromMyPick', auth, (req, res) => {
+    User.findOneAndUpdate(
+        {_id: req.user._id},
+        {
+            "$pull": {
+                "mypick": { "id": req.query.id }  // delete the item
+            }
+        },
+        { new: true },  // bring the new updated data
+        (err, userInfo) => {
+            let mypick = userInfo.mypick;
+            let array = mypick.map(item => {
+                return item.id
+            })
+
+            Product.find({ _id: { $in: array } })
+                .populate('writer')
+                .exec((err, productInfo) => {
+                    return res.status(200).json({
+                        productInfo,
+                        mypick
+                    })
+                })
+        }
+        
+    )
+})
+
 module.exports = router;
