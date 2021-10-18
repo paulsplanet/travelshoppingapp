@@ -1,6 +1,15 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { Button } from "antd";
+import { addToCart } from "../../../../_actions/user_actions";
 
 function MyPickBlock (props) {
+
+    const dispatch = useDispatch();
+    
+    const clickHandler = (productId) => {
+        dispatch(addToCart(productId))
+    }
 
     const renderItems = () => (
        
@@ -15,9 +24,14 @@ function MyPickBlock (props) {
                     {product.title} 
                 </td>
                 <td>
-                    <button onClick={() => props.removeItem(product._id)}>
+                    <Button size="large" sharpe="round" type="danger" onClick={() => clickHandler(product._id)}>
+                        Add to Cart
+                    </Button>
+                </td>
+                <td>
+                    <Button size="large" sharpe="round" onClick={() => props.removeItem(product._id)}>
                         Remove
-                    </button>
+                    </Button>
                 </td>
             </tr>
         ))
@@ -28,14 +42,16 @@ function MyPickBlock (props) {
         <div>
             <table>
                 <colgroup>
-                    <col width="50%"></col>
                     <col width="30%"></col>
+                    <col width="30%"></col>
+                    <col width="20%"></col>
                     <col width="20%"></col>
                 </colgroup>
                 <thead>
                     <tr>
                         <th>Product Image</th>
                         <th>Destination</th>
+                        <th>Add to Cart</th>
                         <th>Remove from My Picks</th>
                     </tr>
                 </thead>

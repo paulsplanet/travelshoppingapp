@@ -7,7 +7,7 @@ import MyPickBlock from "./Sections/MyPickBlock";
 function MyPickPage (props) {
     const dispatch = useDispatch();
     const [myPicks, setMyPicks] = useState()
-    console.log('mypick', myPicks, 'props', props.user)
+    // console.log('mypick', myPicks, 'props', props.user)
 
     useEffect(() => {
         let myPickItems = [];
