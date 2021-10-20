@@ -17,7 +17,7 @@ function MyPickBlock (props) {
             <tr key={index}>
                 <td>
                     <a href={`/product/${product._id}`}>
-                        <img style={{ width: '150px' }} alt="product" src={`http://localhost:5000/${product.images[0]}`} />
+                        <img style={{ width: '150px' }} alt="product" src={`https://travelplanet.herokuapp.com/${product.images[0]}`} />
                     </a>
                 </td>
                 <td>

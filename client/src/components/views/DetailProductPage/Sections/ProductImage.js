@@ -9,8 +9,8 @@ function ProductImage (props) {
             let images = [];
             props.detail.images.map(item => {
                 images.push({
-                    original: `http://localhost:5000/${item}`,
-                    thumbnail: `http://localhost:5000/${item}`,
+                    original: `https://travelplanet.herokuapp.com/${item}`,
+                    thumbnail: `https://travelplanet.herokuapp.com/${item}`,
                 })
             })
             setImages(images)
