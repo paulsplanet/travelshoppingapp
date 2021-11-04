@@ -15,6 +15,8 @@ const config = require("./config/key");
 //   .catch(err => console.error(err));
 
 const mongoose = require("mongoose");
+
+/* original mongoose connect code
 const connect = mongoose.connect(config.mongoURI,
   {
     useNewUrlParser: true, useUnifiedTopology: true,
@@ -22,6 +24,13 @@ const connect = mongoose.connect(config.mongoURI,
   })
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
+*/
+
+//adjustment for deploy
+mongoose.connect(process.env.MONGO_URI || "mongodb+srv://kuntange:1149115@travelplanet.lyjgq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
+  useNewUrlParser: true, useUnifiedTopology: true,
+  useCreateIndex: true, useFindAndModify: false
+});
 
 app.use(cors())
 
@@ -46,7 +55,11 @@ if (process.env.NODE_ENV === "production") {
 
   // Set static folder   
   // All the javascript and css files will be read and served from this folder
-  app.use(express.static(__dirname, "client", "build"));
+  // original app.use code
+  // app.use(express.static(__dirname, "client", "build"));
+
+  // adjustment for deploy
+  app.use(express.static("client/build"));
 
   // index.html for all page routes    html or routing and naviagtion
   app.get("*", (req, res) => {
@@ -54,7 +67,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-const port = process.env.PORT || 5000
+let port = process.env.PORT || 5000;
 
 app.listen(port, () => {
   console.log(`Server Listening on ${port}`)
