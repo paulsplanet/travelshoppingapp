@@ -4,7 +4,7 @@ module.exports = function (app) {
     app.use(
         '/api',
         createProxyMiddleware({
-            target: 'https://git.heroku.com/travelplanetserver.git',
+            target: 'http://localhost:5000',
             changeOrigin: true,
         })
     );
