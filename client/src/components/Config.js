@@ -1,2 +1,2 @@
 //SERVER ROUTES
-export const USER_SERVER = 'https://travelplanetserver.herokuapp.com/api/users';
+export const USER_SERVER = '/api/users';
